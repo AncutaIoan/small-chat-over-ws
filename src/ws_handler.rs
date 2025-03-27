@@ -3,6 +3,9 @@ use futures_util::{SinkExt, StreamExt};
 use tokio::sync::broadcast;
 use warp::ws::{Message, WebSocket};
 
+/*
+    Simulate new client with wscat -c ws://127.0.0.1:7000/ws
+ */
 pub async fn handle_connection(ws: WebSocket, tx: Arc<Mutex<broadcast::Sender<String>>>) {
     let (mut ws_sender, mut ws_receiver) = ws.split();
     let mut rx = tx.lock().unwrap().subscribe();
